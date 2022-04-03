@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+        <!-- Content here -->
+        <div id="weather">
+            <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <Table striped bordered hover>
+                        <tbody>
+                          <tr>
+                            <td>Direction</td>
+                            <td><div id="weather-wind-direction"></div></td>
+                          </tr>
+                          <tr>
+                            <td>Angle</td>
+                            <td><div id="weather-wind-angle"></div></td>
+                          </tr>
+                          <tr>
+                            <td>Speed</td>
+                            <td><div id="weather-wind-speed"></div></td>
+                          </tr>
+                        </tbody>
+                      </Table>
+                  </div>
+                  <div class="col">
+                    <Table striped bordered hover>
+                        <thead>
+                          <tr center>
+                            <th>Probability</th>
+                            <th>Rain</th>
+                            <th>Snow</th>
+                            <th>Sleet</th>
+                            <th>Hail</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr center>
+                            <td><div id="weather-precipitation-probability"></div></td>
+                            <td><div id="weather-precipitation-rain"></div></td>
+                            <td><div id="weather-precipitation-snow"></div></td>
+                            <td><div id="weather-precipitation-sleet"></div></td>
+                            <td><div id="weather-precipitation-hail"></div></td>
+                          </tr>
+                          <tr center>
+                            <td><b>Time</b></td>
+                            <td colSpan='4'><div id="weather-time"></div></td>
+                          </tr>
+                        </tbody>
+                      </Table>
+                  </div>
+                  <div class="col">
+                    <Table striped bordered hover>
+                        <tbody>
+                          <tr>
+                            <td>Temperature</td>
+                            <td><div id="weather-temperature"></div></td>
+                          </tr>
+                          <tr>
+                            <td>Humidity</td>
+                            <td><div id="weather-humidity"></div></td>
+                          </tr>
+                          <tr>
+                            <td>Pressure</td>
+                            <td><div id="weather-pressure"></div></td>
+                          </tr>
+                        </tbody>
+                      </Table>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <div class="d-flex flex-wrap">
+          <div id="rockets">
+
+          </div>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function () {
+            var socket = io();
+            socket.on('r-data', function (data) {
+                $("#weather-temperature").html(`${data.weather.temperature}`)
+                $("#weather-humidity").html(`${data.weather.humidity}`)
+                $("#weather-pressure").html(`${data.weather.pressure}`)
+                $("#weather-precipitation-probability").html(`${data.weather.precipitation.probability}`)
+                $("#weather-precipitation-rain").html(`${data.weather.precipitation.rain}`)
+                $("#weather-precipitation-snow").html(`${data.weather.precipitation.snow}`)
+                $("#weather-precipitation-sleet").html(`${data.weather.precipitation.sleet}`)
+                $("#weather-precipitation-hail").html(`${data.weather.precipitation.hail}`)
+                $("#weather-time").html(`${data.weather.time}`)
+                $("#weather-wind-direction").html(`${data.weather.wind.direction}`)
+                $("#weather-wind-angle").html(`${data.weather.wind.angle}`)
+                $("#weather-wind-speed").html(`${data.weather.wind.speed}`)
+                $("#rockets").html(`Rockets <br>${ 
+                  data.rockets.map(function (rocket){
+                    return '<li>' + JSON.stringify(rocket) + '</li>';
+                  }).join('')}`)
+                //$("#rockets").html(`Rockets: ${data.rockets.map(r => JSON.stringify(r))}`)
+            });
+        });
+    </script>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

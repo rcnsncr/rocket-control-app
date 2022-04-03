@@ -1,0 +1,24 @@
+{
+  "name": "rocket-control-app",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon index.js",
+    "production": "set NODE_ENV=production && node index.js"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "pug": "2.0.0-beta11",
+    "node-fetch": "2.6.7",
+    "socket.io": "^4.4.1",
+    "net": "^1.0.2",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
