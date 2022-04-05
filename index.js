@@ -46,7 +46,6 @@ let repeatFunc = async () => {
 
 repeatFunc();
 
-io.cor
 io.on("connection", (socket) => {
   console.log("Start new connection!");
   let socketPoller = () => {
